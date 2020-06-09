@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb1e66ce-73b1-42b4-88ee-ae716fba70fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/model/flight/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/model/flight/Flight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/Repository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/client/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/client/ClientRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/flight/FlightRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/flight/FlightRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/Repository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/PlaneAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/flight/PlaneAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,30 +76,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1085" y="419" key="#com.intellij.ide.util.MemberChooser" timestamp="1591644441811">
+    <state x="1085" y="419" key="#com.intellij.ide.util.MemberChooser" timestamp="1591739002277">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="1085" y="419" key="#com.intellij.ide.util.MemberChooser/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591644441811" />
+    <state x="1085" y="419" key="#com.intellij.ide.util.MemberChooser/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591739002277" />
     <state x="1059" y="445" key="FileChooserDialogImpl" timestamp="1590934279285">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1059" y="445" key="FileChooserDialogImpl/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1590934279285" />
-    <state width="2516" height="267" key="GridCell.Tab.0.bottom" timestamp="1591674725231">
+    <state width="2516" height="267" key="GridCell.Tab.0.bottom" timestamp="1591741313262">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="267" key="GridCell.Tab.0.bottom/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591674725231" />
-    <state width="2516" height="267" key="GridCell.Tab.0.center" timestamp="1591674725231">
+    <state width="2516" height="267" key="GridCell.Tab.0.bottom/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591741313262" />
+    <state width="2516" height="267" key="GridCell.Tab.0.center" timestamp="1591741313262">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="267" key="GridCell.Tab.0.center/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591674725231" />
-    <state width="2516" height="267" key="GridCell.Tab.0.left" timestamp="1591674725231">
+    <state width="2516" height="267" key="GridCell.Tab.0.center/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591741313262" />
+    <state width="2516" height="267" key="GridCell.Tab.0.left" timestamp="1591741313262">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="267" key="GridCell.Tab.0.left/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591674725231" />
-    <state width="2516" height="267" key="GridCell.Tab.0.right" timestamp="1591674725231">
+    <state width="2516" height="267" key="GridCell.Tab.0.left/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591741313262" />
+    <state width="2516" height="267" key="GridCell.Tab.0.right" timestamp="1591741313262">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="267" key="GridCell.Tab.0.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591674725231" />
+    <state width="2516" height="267" key="GridCell.Tab.0.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591741313262" />
     <state x="781" y="335" key="SettingsEditor" timestamp="1590935492962">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
