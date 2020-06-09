@@ -1,5 +1,7 @@
 package something.something.model.plane;
 
+import java.io.Serializable;
+
 public abstract class Plane{
 
     public enum Propulsion{ //i'd be great to know how the fuck this is translated but I ain't a plane engineer
@@ -9,7 +11,6 @@ public abstract class Plane{
     }
 
     public static class InvalidCostException extends RuntimeException{}
-
 
     private int fuelCapacity;
     private float costPerKm;

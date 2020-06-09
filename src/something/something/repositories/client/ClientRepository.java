@@ -24,7 +24,6 @@ public class ClientRepository implements ClientRepositoryContract {
     //excepción a tirar si el cliente ya existe
     public static class ClientAlreadyRegistered extends Exception{}
 
-
     //en el constructor de cargan los datos del archivo
     //TODO sacar el load y llamarlo aparte?
     private ClientRepository() throws IOException {

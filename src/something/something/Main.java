@@ -6,8 +6,10 @@ import something.something.model.plane.BronzePlane;
 import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
 import something.something.model.client.Client;
+import something.something.repositories.flight.FlightRepository;
 import something.something.model.plane.SilverPlane;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class Main {
@@ -15,7 +17,7 @@ public class Main {
     public static void main(String[] args){
 
         //Test.testClientRepo();
-
+        Test.testFlightRepo();
 
 
         //creo un avión con capacidad 4
@@ -63,7 +65,6 @@ public class Main {
         c.setBestPlaneUsed(plane1);
         c.setBestPlaneUsed(plane2);
         System.out.println("El mejor avión usado por el cliente fue: "+c.getBestPlaneUsed());
-
 
         /*
         switch (new Menu(Arrays.asList(

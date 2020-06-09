@@ -1,14 +1,9 @@
 package something.something.model.flight;
-
-//import com.sun.istack.internal.NotNull;
 import something.something.model.client.Client;
 import something.something.model.plane.Plane;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Flight implements Serializable {
 
     public enum City{
@@ -41,7 +36,7 @@ public class Flight implements Serializable {
     private String clientUsername;
     private Integer companions;
 
-    public Flight(Date date, City origin, City destiny, Plane plane) {
+    public Flight(Date date, City origin, City destiny, Plane plane){
         //TODO verificar que origin/destiny sean distintos. Lo mismo en los setters
         this.date = date;
         this.origin = origin;
@@ -62,6 +57,8 @@ public class Flight implements Serializable {
         clientUsername = null;
         companions = null;
     }
+
+
 
     @Override
     public String toString() {
