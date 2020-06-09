@@ -8,9 +8,7 @@ public abstract class Plane{
         PISTON
     }
 
-    public static class InvalidCostException extends RuntimeException{
-
-    }
+    public static class InvalidCostException extends RuntimeException{}
 
 
     private int fuelCapacity;
@@ -69,7 +67,6 @@ public abstract class Plane{
     public void setPropulsion(Propulsion propulsion) {
         this.propulsion = propulsion;
     }
-
 
     @Override
     public String toString() {

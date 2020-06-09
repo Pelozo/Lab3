@@ -29,7 +29,7 @@ public class FlightRepository implements FlightRepositoryContract {
     }
 
     @Override
-    public List<Client> getAll() {
+    public List<Flight> getAll() {
         return null;
     }
 

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb1e66ce-73b1-42b4-88ee-ae716fba70fa" name="Default Changelist" comment="" />
+    <list default="true" id="eb1e66ce-73b1-42b4-88ee-ae716fba70fa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/model/flight/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/model/flight/Flight.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/Repository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/client/ClientRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/client/ClientRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/flight/FlightRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP_Lab3/something/something/repositories/flight/FlightRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +26,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1cfz3lLql0PgwJKBvsmcObC51jA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,6 +40,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -90,10 +105,10 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="781" y="335" key="SettingsEditor/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1590935492962" />
-    <state x="975" y="527" key="com.intellij.ide.util.TipDialog" timestamp="1591635131362">
+    <state x="975" y="527" key="com.intellij.ide.util.TipDialog" timestamp="1591730850440">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="975" y="527" key="com.intellij.ide.util.TipDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591635131362" />
+    <state x="975" y="527" key="com.intellij.ide.util.TipDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591730850440" />
     <state x="1005" y="654" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1590935481372">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>

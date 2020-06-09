@@ -55,14 +55,19 @@ public class ClientRepository implements ClientRepositoryContract {
         }
     }
 
+
     @Override
     public Boolean add(Client client) {
+        //si el cliente no existe ya
         if(!clients.containsKey(client.getUsername())){
+            //lo agrega y devueelve true
             clients.put(client.getUsername(), client);
             return true;
         }
+        //sino devuelve false
         return false;
     }
+
 
     @Override
     public Boolean remove(String username) {
