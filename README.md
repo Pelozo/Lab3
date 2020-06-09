@@ -44,18 +44,21 @@ Para calcular el total de un vuelo se deben tener en cuenta algunos aspectos:
 AeroTaxi tiene una tarifa fija por cada pasajero de $3500 y una tarifa fija por el tipo de
 avión ( Bronze : $3000, Silver : $4000 y Gold : $6000). De esta manera el cálculo total del
 vuelo es:
-(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo
-de avión)
+
+> (Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo de avión)
 
 AeroTaxi opera en las ciudades de: Buenos Aires, Córdoba, Santiago de Chile y
 Montevideo . Las distancias de estas ciudades son:
-Ciudades Distancia en Kms
-BsAs – Cordoba 695
-BsAs – Santiago 1400
-BsAs – Montevideo 950
-Córdoba – Montevideo 1190
-Córdoba – Santiago 1050
-Montevideo – Santiago 2100
+
+
+|Ciudades   | Distancia en Kms |
+|--|--|
+| BsAs – Cordoba | 695 |
+| BsAs – Santiago | 1400|
+| BsAs – Montevideo  | 950|
+| Córdoba – Montevideo  | 1190|
+| Córdoba – Santiago | 1050|
+| Montevideo – Santiago | 2100|
 
 Otra de las acciones que puede realizar el usuario es la de cancelar un vuelo . Un
 vuelo sólo puede ser cancelado con más de un día de anticipación. En caso de que no
