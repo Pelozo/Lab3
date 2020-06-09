@@ -24,7 +24,13 @@ public class Main {
         Plane plane = new GoldPlane(50,150,4, 600, Plane.Propulsion.PISTON, false);
 
         //creo un vuelo
-        Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        Flight flight = null;
+        try{
+            flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        }
+        catch (Flight.OriginDestinyException OriginDestinyException){
+            System.out.println("El origen y el destino seleccionados son iguales.");
+        }
 
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
@@ -44,10 +50,7 @@ public class Main {
             e.printStackTrace();
         }
 
-
-
-
-        //System.out.println(flight);
+        System.out.println(flight.calculateTotalCost());
 
         Gson gson = new Gson();
         String json = gson.toJson(flight, Flight.class);

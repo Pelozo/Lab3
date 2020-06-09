@@ -69,6 +69,8 @@ public abstract class Plane{
         this.propulsion = propulsion;
     }
 
+
+
     @Override
     public String toString() {
         return "Plane{" +

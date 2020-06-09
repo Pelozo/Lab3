@@ -1,9 +1,15 @@
 package something.something.model.flight;
 import something.something.model.client.Client;
+import something.something.model.plane.BronzePlane;
+import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
+import something.something.model.plane.SilverPlane;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 public class Flight implements Serializable {
 
     public enum City{
@@ -28,6 +34,18 @@ public class Flight implements Serializable {
         }
     }
 
+    public static class OriginDestinyException extends Exception{
+        private City origin;
+        public OriginDestinyException(City origin){
+            this.origin = origin;
+        }
+
+        public City getOrigin(){
+            return origin;
+        }
+    }
+
+    private UUID ID = UUID.randomUUID();
     private Date date;
     private City origin;
     private City destiny;
@@ -36,11 +54,17 @@ public class Flight implements Serializable {
     private String clientUsername;
     private Integer companions;
 
-    public Flight(Date date, City origin, City destiny, Plane plane){
+
+    public Flight(Date date, City origin, City destiny, Plane plane) throws OriginDestinyException{
+
         //TODO verificar que origin/destiny sean distintos. Lo mismo en los setters
         this.date = date;
-        this.origin = origin;
-        this.destiny = destiny;
+        if(origin.equals(destiny))
+            throw new OriginDestinyException(origin);
+        else{
+            this.origin = origin;
+            this.destiny = destiny;
+        }
         this.plane = plane;
     }
 
@@ -58,6 +82,54 @@ public class Flight implements Serializable {
         companions = null;
     }
 
+
+    public int calculateKilometres(City origin,City destiny){
+        int kilometres = 0;
+        if(origin == City.BSAS){
+            if(destiny == City.CORDOBA)
+                kilometres = 695;
+            else{
+                if(destiny == City.SANTIAGO)
+                    kilometres = 1400;
+                else{
+                    if(destiny == City.MONTEVIDEO)
+                        kilometres = 950;
+                }
+            }
+        }else{
+            if(origin == City.CORDOBA){
+                if(destiny == City.MONTEVIDEO)
+                    kilometres = 1190;
+                else{
+                    if(destiny == City.SANTIAGO)
+                        kilometres = 1050;
+                }
+            }
+            else{
+                if(origin == City.MONTEVIDEO)
+                    kilometres = 2100;
+            }
+        }
+        return kilometres;
+    }
+
+    public int planeTariff(){
+        int tariff = 0;
+        if(plane instanceof BronzePlane)
+            tariff = 3000;
+        else{
+            if(plane instanceof SilverPlane)
+                tariff = 4000;
+            else
+                tariff = 6000;
+        }
+        return tariff;
+    }
+
+    public double calculateTotalCost(){
+        double total = (calculateKilometres(origin,destiny)*plane.getCostPerKm())+(companions*3500)+planeTariff();
+        return total;
+    }
 
 
     @Override
