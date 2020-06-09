@@ -1,6 +1,6 @@
 package something.something.model.flight;
 
-import com.sun.istack.internal.NotNull;
+//import com.sun.istack.internal.NotNull;
 import something.something.model.client.Client;
 import something.something.model.plane.Plane;
 
