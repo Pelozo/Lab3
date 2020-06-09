@@ -1,6 +1,4 @@
 package something.something.model.flight;
-
-//import com.sun.istack.internal.NotNull;
 import something.something.model.client.Client;
 import something.something.model.plane.BronzePlane;
 import something.something.model.plane.GoldPlane;
@@ -12,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 public class Flight implements Serializable {
 
     public enum City{
@@ -57,7 +54,9 @@ public class Flight implements Serializable {
     private String clientUsername;
     private Integer companions;
 
+
     public Flight(Date date, City origin, City destiny, Plane plane) throws OriginDestinyException{
+
         //TODO verificar que origin/destiny sean distintos. Lo mismo en los setters
         this.date = date;
         if(origin.equals(destiny))
@@ -82,6 +81,7 @@ public class Flight implements Serializable {
         clientUsername = null;
         companions = null;
     }
+
 
     public int calculateKilometres(City origin,City destiny){
         int kilometres = 0;
@@ -130,6 +130,7 @@ public class Flight implements Serializable {
         double total = (calculateKilometres(origin,destiny)*plane.getCostPerKm())+(companions*3500)+planeTariff();
         return total;
     }
+
 
     @Override
     public String toString() {
