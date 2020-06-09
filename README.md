@@ -1,3 +1,4 @@
+
 # Lab3
 
 Se realizará un sistema que permita a sus usuarios contratar un vuelo privado
@@ -7,12 +8,13 @@ Para completar este registro debe indicar los datos de: Nombre, Apellido, DNI y 
 La empresa AeroTaxi trabaja con una flota específica de aviones. Cuenta con tres
 tipos diferentes de aviones: Gold , Silver y Bronze . La ficha técnica que comparten estos
 aviones es:
-● Capacidad de combustible
-● Costo por km (este valor ronda entre los $150 y $300)
-● Capacidad máxima de pasajeros
-● Velocidad máxima(en km/h)
-● Tipo de propulsión que tiene (motor a reacción, motor a hélice o motor de
-pistones).
+
+ - Capacidad de combustible 
+ - Costo por km (este valor ronda entre los $150 y $300) 
+ - Capacidad máxima de pasajeros
+ -  Velocidad máxima(en km/h)
+ - Tipo de propulsión que tiene (motor a reacción, motor a hélice o
+   motor de pistones).
 
 Otros detalles importantes de la flota es que los aviones Gold y Silver tienen
 servicio de catering y algunos aviones Gold tienen conexión continua de WIFI.
@@ -27,14 +29,16 @@ deberá confirmar para generar el vuelo.
 
 Es importante que el sistema realice algunas validaciones para su correcto
 funcionamiento:
-● No se puede seleccionar la misma ciudad como origen y destino.
-● El sistema debe tener en cuenta la cantidad de pasajeros por avión, en caso
-de que la cantidad de pasajeros es mayor que la capacidad de la flota
-disponible, el sistema debe mostrar un mensaje: “No tenemos aviones
-disponibles con esa capacidad de pasajeros”.
-● Los aviones de la empresa SOLO realizan un vuelo por día, esto es por
-motivos técnicos. Si el avión tiene un vuelo programado para el día que
-selecciona el usuario, no debe aparecer en la lista de aviones disponibles.
+
+ - No se puede seleccionar la misma ciudad como origen y destino. 
+ - El sistema debe tener en cuenta la cantidad de pasajeros por avión, en
+   caso de que la cantidad de pasajeros es mayor que la capacidad de la
+   flota disponible, el sistema debe mostrar un mensaje: “No tenemos
+   aviones disponibles con esa capacidad de pasajeros”. 
+ - Los aviones de la empresa SOLO realizan un vuelo por día, esto es
+   por motivos técnicos. Si el avión tiene un vuelo programado para
+   el día que    selecciona el usuario, no debe aparecer en la lista de
+   aviones    disponibles.
 
 Para calcular el total de un vuelo se deben tener en cuenta algunos aspectos:
 AeroTaxi tiene una tarifa fija por cada pasajero de $3500 y una tarifa fija por el tipo de
@@ -61,15 +65,19 @@ Cuando un vuelo es cancelado, significa que es “ borrado ” del sistema.
 El sistema realiza algunas salidas con información sobre vuelos y clientes. Se
 solicita generar un método para listar todos los vuelos programados en una fecha dada y
 generar otro método para listar todos los clientes indicando por cada uno:
-● Todos los datos personales.
-● La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
-● Total gastado de todos sus vuelos.
+
+ - Todos los datos personales. 
+ - La categoría del mejor avión utilizado (Gold, Silver o Bronze). 
+ - Total gastado de todos sus vuelos.
 
 Algunos aspectos técnicos que se les pedirá para la aprobación
 del trabajo:
-● El manejo de versiones (GIT) donde se vea el trabajo de cada miembro del
-grupo.
-● Manejo de excepciones para controlar el correcto comportamiento del
-sistema.
-● Manejo de archivos “json” para almacenar toda la información del sistema.
-● Código lo más claro posible, agregando comentarios de ser necesarios.
+
+ - El manejo de versiones (GIT) donde se vea el trabajo de cada miembro
+   del grupo.   
+ - Manejo de excepciones para controlar el correcto comportamiento del
+   sistema.
+ - Manejo de archivos “json” para almacenar toda la información del
+   sistema
+ - Código lo más claro posible, agregando comentarios de ser
+   necesarios.
