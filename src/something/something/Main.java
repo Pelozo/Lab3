@@ -50,13 +50,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println(flight.calculateTotalCost());
+//        System.out.println(flight.calculateTotalCost());
 
         Gson gson = new Gson();
         String json = gson.toJson(flight, Flight.class);
 
         System.out.println(json);
-        c.addFlightCost();
+        c.addFlightCost(flight.calculateTotalCost());
         System.out.println("Costo total en vuelos del cliente: "+c.getTotalSpent());
         //creo diferentes tipos de Plane
         Plane plane1=new BronzePlane(36,150F,3,400,Plane.Propulsion.REACTION);

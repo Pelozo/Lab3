@@ -74,7 +74,12 @@ public class Test {
         Plane plane = new GoldPlane(50,150,4, 600, Plane.Propulsion.PISTON, false);
 
         //creo un vuelo
-        Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        Flight flight = null;
+        try {
+            flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        } catch (Flight.OriginDestinyException e) {
+            e.printStackTrace();
+        }
 
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
@@ -114,7 +119,12 @@ public class Test {
         Plane plane = new GoldPlane(50,150,4, 600, Plane.Propulsion.PISTON, false);
 
         //creo un vuelo
-        Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        Flight flight = null;
+        try {
+            flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
+        } catch (Flight.OriginDestinyException e) {
+            e.printStackTrace();
+        }
 
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);

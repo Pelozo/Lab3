@@ -116,12 +116,8 @@ public class Client implements Serializable {
         return totalSpent;
     }
 
-    public float flightCost (){
-        return 5300;
-    }
-
-    public void addFlightCost(){ //añade el costo de un vuelo al gasto total (pasar por parámetro el método de Flight)
-        totalSpent+=flightCost();
+    public void addFlightCost(double flightCost){ //añade el costo de un vuelo al gasto total (pasar por parámetro el método de Flight)
+        totalSpent+=flightCost;
     }
 
     public void setBestPlaneUsed (Plane aux){ //Le paso por parámetro Flight.getPlane()
