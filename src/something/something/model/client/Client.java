@@ -1,9 +1,14 @@
 package something.something.model.client;
 
+import something.something.model.flight.Flight;
+import something.something.model.plane.BronzePlane;
+import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
+import something.something.model.plane.SilverPlane;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 
 public class Client implements Serializable {
 
@@ -102,4 +107,39 @@ public class Client implements Serializable {
                 ", age=" + age +
                 '}';
     }
+
+    public void setTotalSpent(float totalSpent){
+        this.totalSpent=totalSpent;
+    }
+
+    public float getTotalSpent (){
+        return totalSpent;
+    }
+
+    public float flightCost (){
+        return 5300;
+    }
+
+    public void addFlightCost(){ //añade el costo de un vuelo al gasto total (pasar por parámetro el método de Flight)
+        totalSpent+=flightCost();
+    }
+
+    public void setBestPlaneUsed (Plane aux){ //Le paso por parámetro Flight.getPlane()
+        if (bestPlaneUsed == null) {
+            bestPlaneUsed=aux;
+        } else {
+            if (!(bestPlaneUsed instanceof GoldPlane)){
+                if (bestPlaneUsed instanceof BronzePlane && aux instanceof SilverPlane)
+                    bestPlaneUsed=aux;
+                else
+                    if (bestPlaneUsed instanceof SilverPlane && aux instanceof GoldPlane)
+                        bestPlaneUsed=aux;
+            }
+        }
+    }
+
+    public Plane getBestPlaneUsed(){
+        return bestPlaneUsed;
+    }
+
 }
