@@ -14,8 +14,6 @@ public class Menu {
     public Menu(List<String> options) {
         this.options = options;
     }
-
-
     public void print(){
         for(int i = 0; i < options.size(); i++){
             System.out.println(i + 1  + ". " + options.get(i));
