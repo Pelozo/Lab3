@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8f9c96d9-228f-49ef-865e-acd5d32b0ce5" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dCWxUI4Yn6rBmKYdjHjpXqoznm" />
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="something.something.Main" />
+      <module name="TP_Lab3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f9c96d9-228f-49ef-865e-acd5d32b0ce5" name="Default Changelist" comment="" />
+      <created>1591929801485</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591929801485</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="734" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591929829645">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="734" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591929829645" />
+    <state x="1009" y="487" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591929828301">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1009" y="487" key="#com.intellij.ide.util.TreeClassChooserDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591929828301" />
+  </component>
+</project>
