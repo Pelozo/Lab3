@@ -2,7 +2,9 @@ package something.something.ui_questionmark;
 
 import something.something.model.client.Client;
 import something.something.model.flight.Flight;
+import something.something.repositories.client.ClientRepository;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -13,25 +15,23 @@ import java.util.Scanner;
 
 public class Menu {
 
+
     public void systemPause() {
         System.out.println("Presione una tecla para continuar...");
         new java.util.Scanner(System.in).nextLine();
     }
 
-    private List<String> options;
-
-    public Menu(List<String> options) {
-        this.options = options;
+    public Menu() {
     }
 
-    public void print() {
+    public static void print(List<String> options) {
         for (int i = 0; i < options.size(); i++) {
             System.out.println(i + 1 + ". " + options.get(i));
         }
         System.out.println("0. Volver");
     }
 
-    public int printAndWaitAnswer() {
+    public static int printAndWaitAnswer(List<String> options) {
 
         final String ERROR = "La opcion ingresada no es válida. Debe ingresar un número entre 0 y " + options.size();
 
@@ -39,7 +39,7 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
 
         do {
-            print();
+            print(options);
 
             if (sc.hasNextInt()) {
                 menuOption = sc.nextInt();
@@ -57,11 +57,22 @@ public class Menu {
 
     //menu inicial
     public void startMenu() {
+
+        ClientRepository clients = null;
+        try {
+            clients = ClientRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se pudo leer el archivo de clientes y no se pudo crear uno nuevo.\n Saliendo... ");
+            e.printStackTrace();
+            return;
+        }
+
         System.out.print("- AeroTaxi -\n¡BIENVENIDO! Vola con AeroTaxi...\n");
 
-        switch (new Menu(Arrays.asList(
+
+        switch (printAndWaitAnswer(Arrays.asList(
                 "Registrarse",
-                "Iniciar sesión")).printAndWaitAnswer()) {
+                "Iniciar sesión"))) {
             case 1:
                 //registro un cliente nuevo y muestro nuevo menu de opciones para contratar un vuelo
                 System.out.println("Fase de Registro:");
@@ -82,10 +93,28 @@ public class Menu {
                 age = read.nextInt();
                 System.out.print("Nombre de Usuario: ");
                 username = read.next();
+
+                //TODO verificar si el usuario ya existe
+
+                if(clients.exists(username)){
+                    //TODO el usuario ya existe, seguir preguntando por usuarios
+                }
+
+
                 System.out.print("Contraseña: ");
                 password = read.next();
                 Client client = new Client(username, password, firstName, lastName, DNI, age);
                 //guardar el cliente nuevo en un archivo or something
+                clients.add(client);
+
+                try {
+                    clients.commit();
+                } catch (IOException e) {
+                    System.out.println("No se pudo escribir el archivo de clientes...");
+                    e.printStackTrace();
+                    return;
+                }
+
                 System.out.println("Cliente registrado con exito!\n" + client);
                 systemPause();
                 startMenu();
@@ -98,8 +127,17 @@ public class Menu {
                 username = read1.next();
                 System.out.print("Contraseña: ");
                 password = read1.next();
-                //if(el usuario existe)
-                hireCancelFlightMenu();
+                //recupera usuario del repositorio
+                Client loggedClient = clients.get(username);
+                if(loggedClient == null){
+                    //TODO el usuario no existe
+                }else if(!loggedClient.getPassword().equals(password)){
+                    //TODO el usuario existe pero la contraseña es incorrecta
+                }else{
+                    //login correcto
+                    hireCancelFlightMenu();
+                }
+
                 break;
             default:
                 break;
@@ -109,10 +147,10 @@ public class Menu {
     //menu para seleccionar origen
     public Flight.City selectOrigin() {
         Flight.City origin = null;
-        switch (new Menu(Arrays.asList(
+        switch (printAndWaitAnswer(Arrays.asList(
                 "Buenos Aires",
                 "Córdoba",
-                "Montevideo")).printAndWaitAnswer()) {
+                "Montevideo"))) {
             case 1:
                 origin = Flight.City.BSAS;
                 break;
@@ -131,10 +169,10 @@ public class Menu {
     //menu para seleccionar destino
     public Flight.City selectDestiny() {
         Flight.City destiny = null;
-        switch (new Menu(Arrays.asList(
+        switch (printAndWaitAnswer(Arrays.asList(
                 "Córdoba",
                 "Santiago",
-                "Montevideo")).printAndWaitAnswer()) {
+                "Montevideo"))) {
             case 1:
                 destiny = Flight.City.CORDOBA;
                 break;
@@ -152,9 +190,10 @@ public class Menu {
 
     //menu para contratar o cancelar un vuelo
     public void hireCancelFlightMenu() {
-        switch (new Menu(Arrays.asList(
-                "Contratar vuelo",
-                "Cancelar vuelo")).printAndWaitAnswer()) {
+        switch (printAndWaitAnswer(Arrays.asList(
+                "Córdoba",
+                "Santiago",
+                "Montevideo"))) {
             case 1:
                 //pide la fecha del vuelo
                 Date date = askForDate("- Ingrese la fecha en la que desea viajar, ");

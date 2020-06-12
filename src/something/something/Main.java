@@ -19,8 +19,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        //Test.testClientRepo();
-//        Test.testFlightRepo();
+        Test.run();
+
+//
 //
 //
 //        //creo un avión con capacidad 4
@@ -72,7 +73,7 @@ public class Main {
 //        c.setBestPlaneUsed(plane2);
 //        System.out.println("El mejor avión usado por el cliente fue: "+c.getBestPlaneUsed());
 
-            Menu menu = new Menu(new ArrayList<>());
+            Menu menu = new Menu();
             menu.startMenu();
 
 

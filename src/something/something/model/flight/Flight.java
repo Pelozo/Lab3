@@ -6,10 +6,8 @@ import something.something.model.plane.Plane;
 import something.something.model.plane.SilverPlane;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
 public class Flight implements Serializable {
 
     public enum City{
@@ -45,7 +43,7 @@ public class Flight implements Serializable {
         }
     }
 
-    private UUID ID = UUID.randomUUID();
+    private String ID = UUID.randomUUID().toString();
     private Date date;
     private City origin;
     private City destiny;
@@ -54,17 +52,10 @@ public class Flight implements Serializable {
     private String clientUsername;
     private Integer companions;
 
-
     public Flight(Date date, City origin, City destiny, Plane plane) throws OriginDestinyException{
-
-        //TODO verificar que origin/destiny sean distintos. Lo mismo en los setters
+        setOrigin(origin);
+        setDestiny(destiny);
         this.date = date;
-        if(origin.equals(destiny))
-            throw new OriginDestinyException(origin);
-        else{
-            this.origin = origin;
-            this.destiny = destiny;
-        }
         this.plane = plane;
     }
 
@@ -131,6 +122,78 @@ public class Flight implements Serializable {
         return total;
     }
 
+
+    public String getID() {
+        return ID;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public City getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(City origin) throws OriginDestinyException {
+
+        if(origin.equals(this.destiny))
+            throw new OriginDestinyException(origin);
+        else{
+            this.origin = origin;
+        }
+    }
+
+    public City getDestiny() {
+        return destiny;
+    }
+
+    public void setDestiny(City destiny) throws OriginDestinyException {
+        if(this.origin.equals(destiny))
+            throw new OriginDestinyException(origin);
+        else{
+            this.destiny = destiny;
+        }
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
+    public Integer getCompanions() {
+        return companions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return ID.equals(flight.ID) &&
+                Objects.equals(date, flight.date) &&
+                origin == flight.origin &&
+                destiny == flight.destiny &&
+                Objects.equals(plane, flight.plane) &&
+                Objects.equals(clientUsername, flight.clientUsername) &&
+                Objects.equals(companions, flight.companions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 
     @Override
     public String toString() {
