@@ -94,6 +94,10 @@ public class ClientRepository implements ClientRepositoryContract {
         return clients.containsKey(client.getUsername());
     }
 
+    public Boolean exists(String username){
+        return exists(new Client(username));
+    }
+
     @Override
     public void commit() throws IOException {
         FileWriter fw = new FileWriter(FILENAME);

@@ -66,12 +66,22 @@ public class FlightRepository implements FlightRepositoryContract {
 
     @Override
     public Boolean add(Flight flight) {
-        return flights.add(flight);
+        if(!flights.contains(flight)){
+            flights.add(flight);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Boolean remove(String id) {
-        return null;
+        for(Flight f: flights){
+            if(f.getID().equals(id)){
+                flights.remove(f);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -81,6 +91,11 @@ public class FlightRepository implements FlightRepositoryContract {
 
     @Override
     public Flight get(String id) {
+        for(Flight f: flights){
+            if(f.getID().equals(id)){
+                return f;
+            }
+        }
         return null;
     }
 
