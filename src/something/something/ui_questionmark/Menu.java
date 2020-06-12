@@ -96,7 +96,7 @@ public class Menu {
 
                 //TODO verificar si el usuario ya existe
 
-                if(clients.exists(username)){
+                if (clients.exists(username)) {
                     //TODO el usuario ya existe, seguir preguntando por usuarios
                 }
 
@@ -129,11 +129,11 @@ public class Menu {
                 password = read1.next();
                 //recupera usuario del repositorio
                 Client loggedClient = clients.get(username);
-                if(loggedClient == null){
+                if (loggedClient == null) {
                     //TODO el usuario no existe
-                }else if(!loggedClient.getPassword().equals(password)){
+                } else if (!loggedClient.getPassword().equals(password)) {
                     //TODO el usuario existe pero la contraseña es incorrecta
-                }else{
+                } else {
                     //login correcto
                     hireCancelFlightMenu();
                 }
@@ -167,33 +167,57 @@ public class Menu {
     }
 
     //menu para seleccionar destino
-    public Flight.City selectDestiny() {
+    public Flight.City selectDestiny(Flight.City origin) {
         Flight.City destiny = null;
-        switch (printAndWaitAnswer(Arrays.asList(
-                "Córdoba",
-                "Santiago",
-                "Montevideo"))) {
-            case 1:
-                destiny = Flight.City.CORDOBA;
-                break;
-            case 2:
-                destiny = Flight.City.SANTIAGO;
-                break;
-            case 3:
-                destiny = Flight.City.MONTEVIDEO;
-                break;
-            default:
-                break;
+        if (origin == Flight.City.BSAS) {
+            switch (printAndWaitAnswer(Arrays.asList(
+                    "Córdoba",
+                    "Santiago",
+                    "Montevideo"))) {
+                case 1:
+                    destiny = Flight.City.CORDOBA;
+                    break;
+                case 2:
+                    destiny = Flight.City.SANTIAGO;
+                    break;
+                case 3:
+                    destiny = Flight.City.MONTEVIDEO;
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            if (origin == Flight.City.CORDOBA) {
+                switch (printAndWaitAnswer(Arrays.asList(
+                        "Montevideo",
+                        "Santiago"))) {
+                    case 1:
+                        destiny = Flight.City.MONTEVIDEO;
+                        break;
+                    case 2:
+                        destiny = Flight.City.SANTIAGO;
+                        break;
+                }
+            } else {
+                if (origin == Flight.City.MONTEVIDEO) {
+                    switch (printAndWaitAnswer(Arrays.asList(
+                            "Santiago"))) {
+                        case 1:
+                            destiny = Flight.City.SANTIAGO;
+                            break;
+                    }
+                }
+            }
         }
+
         return destiny;
     }
 
     //menu para contratar o cancelar un vuelo
     public void hireCancelFlightMenu() {
         switch (printAndWaitAnswer(Arrays.asList(
-                "Córdoba",
-                "Santiago",
-                "Montevideo"))) {
+                "Contratar vuelo",
+                "Cancelar vuelo"))) {
             case 1:
                 //pide la fecha del vuelo
                 Date date = askForDate("- Ingrese la fecha en la que desea viajar, ");
@@ -202,10 +226,9 @@ public class Menu {
                 Flight.City origin = selectOrigin();
                 System.out.println("Origen seleccionado: " + origin);
                 System.out.println("- Seleccione la ciudad de Destino del vuelo: ");
-                Flight.City destiny = selectDestiny();
+                Flight.City destiny = selectDestiny(origin);
                 //verificar q destino y origen sean distintos
                 System.out.println("- Ingrese la cantidad de acompañantes: ");
-
                 break;
             case 2:
                 break;
