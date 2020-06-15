@@ -62,7 +62,7 @@ public class Main {
 //        System.out.println(json);
 //        c.addFlightCost(flight.calculateTotalCost());
 //        System.out.println("Costo total en vuelos del cliente: "+c.getTotalSpent());
-//        //creo diferentes tipos de Plane
+        //creo diferentes tipos de Plane
 //        Plane plane1=new BronzePlane(36,150F,3,400,Plane.Propulsion.REACTION);
 //        Plane plane2=new SilverPlane(45,150F,5,500,Plane.Propulsion.PROPELLER);
 //        Plane plane3=new GoldPlane(41,150F,5,600,Plane.Propulsion.PISTON,true);
