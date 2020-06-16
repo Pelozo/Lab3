@@ -2,6 +2,10 @@ package something.something.ui_questionmark;
 
 import something.something.model.client.Client;
 import something.something.model.flight.Flight;
+import something.something.model.plane.BronzePlane;
+import something.something.model.plane.GoldPlane;
+import something.something.model.plane.Plane;
+import something.something.model.plane.SilverPlane;
 import something.something.repositories.client.ClientRepository;
 
 import java.io.IOException;
@@ -82,6 +86,7 @@ public class Menu {
                 int age;
                 String username;
                 String password;
+
                 Scanner read = new Scanner(System.in);
                 System.out.print("Nombre: ");
                 firstName = read.next();
@@ -91,15 +96,14 @@ public class Menu {
                 DNI = read.next();
                 System.out.print("Edad: ");
                 age = read.nextInt();
-                System.out.print("Nombre de Usuario: ");
-                username = read.next();
-
-                //TODO verificar si el usuario ya existe
-
-                if (clients.exists(username)) {
-                    //TODO el usuario ya existe, seguir preguntando por usuarios
-                }
-
+                do {
+                    System.out.print("Nombre de Usuario: ");
+                    username = read.next();
+                    if (clients.exists(username)) {//TODO verificar si el usuario ya existe
+                        //TODO el usuario ya existe, seguir preguntando por usuarios
+                        System.out.println("El nombre de usuario ya existe, por favor elija otro.");
+                    }
+                } while (clients.exists(username));
 
                 System.out.print("Contraseña: ");
                 password = read.next();
@@ -109,13 +113,13 @@ public class Menu {
 
                 try {
                     clients.commit();
+                    System.out.println("Cliente registrado con exito!\n" + client);
                 } catch (IOException e) {
                     System.out.println("No se pudo escribir el archivo de clientes...");
                     e.printStackTrace();
                     return;
                 }
 
-                System.out.println("Cliente registrado con exito!\n" + client);
                 systemPause();
                 startMenu();
                 break;
@@ -131,13 +135,15 @@ public class Menu {
                 Client loggedClient = clients.get(username);
                 if (loggedClient == null) {
                     //TODO el usuario no existe
+                    System.out.println("El usuario ingresado no existe.");
                 } else if (!loggedClient.getPassword().equals(password)) {
                     //TODO el usuario existe pero la contraseña es incorrecta
+                    //TODO volver a pedir datos incorrectos?
+                    System.out.println("La contraseña ingresada es incorrecta");
                 } else {
                     //login correcto
-                    hireCancelFlightMenu();
+                    hireCancelFlightMenu(loggedClient);
                 }
-
                 break;
             default:
                 break;
@@ -213,8 +219,54 @@ public class Menu {
         return destiny;
     }
 
+    public Plane selectPlane(BronzePlane bronze, SilverPlane silver, GoldPlane gold1, GoldPlane gold2){
+        Plane selected = null;
+
+        switch (printAndWaitAnswer(Arrays.asList(
+                bronze.toString(),
+                silver.toString(),
+                gold1.toString(),
+                gold2.toString()))) {
+            case 1:
+                selected=bronze;
+                break;
+            case 2:
+                selected=silver;
+                break;
+            case 3:
+                selected= gold1;
+                break;
+            case 4:
+                selected= gold2;
+                break;
+        }
+        return selected;
+    }
+
+    public boolean confirm (){
+        boolean confirm= false;
+        switch (printAndWaitAnswer(Arrays.asList(
+                "Sí",
+                "No")))
+        {
+            case 1:
+                confirm=true;
+                break;
+
+            case 2:
+                confirm=false;
+                break;
+        }
+        return confirm;
+    }
+
     //menu para contratar o cancelar un vuelo
-    public void hireCancelFlightMenu() {
+    public void hireCancelFlightMenu(Client client) {
+        //TODO crear los Plane acá?
+        BronzePlane bronze= new BronzePlane(100, 150, 4, 400, Plane.Propulsion.PISTON);
+        SilverPlane silver= new SilverPlane(120, 230, 5, 550, Plane.Propulsion.PROPELLER);
+        GoldPlane gold1= new GoldPlane(200, 270, 6, 600, Plane.Propulsion.REACTION, false);
+        GoldPlane gold2= new GoldPlane(200,300,6,600,Plane.Propulsion.REACTION,true);
         switch (printAndWaitAnswer(Arrays.asList(
                 "Contratar vuelo",
                 "Cancelar vuelo"))) {
@@ -227,10 +279,34 @@ public class Menu {
                 System.out.println("Origen seleccionado: " + origin);
                 System.out.println("- Seleccione la ciudad de Destino del vuelo: ");
                 Flight.City destiny = selectDestiny(origin);
-                //verificar q destino y origen sean distintos
                 System.out.println("- Ingrese la cantidad de acompañantes: ");
+                Scanner read = new Scanner(System.in);
+                int companions;
+                companions = read.nextInt();
+                System.out.println("- Seleccione el avión: ");
+                Plane plane= selectPlane(bronze,silver,gold1,gold2);
+                Flight flight = null;
+                try {
+                    flight = new Flight(date, origin, destiny,plane);
+                } catch (Flight.OriginDestinyException e) {//TODO sacar esta excepción?
+                    e.printStackTrace();
+                }
+                try {
+                    flight.addPassagers(client, companions);
+                } catch (Flight.MaxCapacityException e) {//TODO sacar esta excepción?
+                    System.out.println("El vuelo acepta hasta " + e.getMaxCapacity() + " pasajeros");
+                }
+                //TODO mostrar costo total de vuelo y pedir confirmacion
+                System.out.println("Costo total de vuelo: "+flight.calculateTotalCost());
+                System.out.println("Desea confirmar el vuelo?:");
+                if (confirm()){
+                    System.out.println("Vuelo confirmado");
+                } else
+                    startMenu(); ///TODO si cancela el vuelo vuelve al menú principal
+
                 break;
             case 2:
+                //TODO buscar cliente en el archivo de vuelos y cancelarlo
                 break;
             default:
                 break;
