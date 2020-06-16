@@ -44,11 +44,7 @@ public class Main {
                 e.printStackTrace();
                 return;
             }
-        }else{
-            //System.out.println("Aviones: " + planeRepository.getAll());
         }
-
-
 
 
 

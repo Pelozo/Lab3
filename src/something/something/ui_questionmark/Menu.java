@@ -10,6 +10,7 @@ import something.something.repositories.client.ClientRepository;
 import something.something.repositories.flight.FlightRepository;
 import something.something.repositories.plane.PlaneRepository;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -119,6 +120,7 @@ public class Menu {
                 }
 
                 systemPause();
+                //TODO no hacer recursivo, acomodar
                 startMenu();
                 break;
             case 2:
@@ -260,7 +262,6 @@ public class Menu {
             return;
         }
 
-
         switch (printAndWaitAnswer(Arrays.asList(
                 "Contratar vuelo",
                 "Cancelar vuelo"))) {
@@ -292,6 +293,7 @@ public class Menu {
                 for(Plane p: availablePlanes){
                     options.add("Tipo: " + p.getType() + ", Capacidad: " + p.getPassengerCapacity() + ", Velocidad: " + p.getMaxSpeed());
                 }
+            
                 //seleccionamos el avion
                 Plane plane = availablePlanes.get(printAndWaitAnswer(options) - 1);
                 //Creamos el vuelo
@@ -311,8 +313,7 @@ public class Menu {
                         e.printStackTrace();
                     }
                 } else
-                    startMenu(); ///TODO si cancela el vuelo vuelve al menú principal
-
+                    startMenu(); ///TODO si no confirma el vuelo, vuelve al menú principal
                 break;
             case 2://cancelar vuelo
                 //mostramos todos los vuelos del usuario
@@ -325,13 +326,13 @@ public class Menu {
                         cancelOptions.add(f.getDate().toString() + " | " + f.getOrigin() + " - " + f.getDestiny());
                     }
                     int selectedFlight = printAndWaitAnswer(cancelOptions);
-                    //borramos el vuelvo seleccionado
+                    //borramos el vuelo seleccionado
                     flightRepository.remove(flightForClient.get(selectedFlight - 1).getID());
                     try {
                         flightRepository.commit();
                         System.out.println("Vuelo cancelado");
                     } catch (IOException e) {
-                        System.out.println("No se pudo cancelar el vuelvo");
+                        System.out.println("No se pudo cancelar el vuelo");
                         e.printStackTrace();
                         return;
                     }

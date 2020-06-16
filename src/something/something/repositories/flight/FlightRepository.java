@@ -59,6 +59,16 @@ public class FlightRepository implements FlightRepositoryContract {
 
     }
 
+    //busca ID por username en lista de vuelos
+    public String searchID(String username){
+        String ID = null;
+        for(int i=0;i<flights.size();i++){
+            if(username.equals(flights.get(i).getClientUsername()))
+                ID = flights.get(i).getID();
+        }
+        return ID;
+    }
+
     @Override
     public Boolean add(Flight flight) {
         if(!flights.contains(flight)){
