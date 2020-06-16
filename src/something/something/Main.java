@@ -8,6 +8,7 @@ import something.something.model.plane.Plane;
 import something.something.model.client.Client;
 import something.something.repositories.flight.FlightRepository;
 import something.something.model.plane.SilverPlane;
+import something.something.repositories.plane.PlaneRepository;
 import something.something.ui_questionmark.Menu;
 
 import java.io.IOException;
@@ -19,7 +20,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Test.run();
+        //Test.run();
+
+
+        PlaneRepository planeRepository;
+        try {
+            planeRepository = PlaneRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se pudo acceder al archivo Planes ni crear uno nuevo. Saliendo...");
+            e.printStackTrace();
+            return;
+        }
+
+        //si no hay aviones se agregan algunos.
+        if(planeRepository.getAll().isEmpty()) {
+            planeRepository.add(new BronzePlane(20, 150, 2, 200, Plane.Propulsion.REACTION));
+            planeRepository.add(new SilverPlane(30, 200, 3, 450, Plane.Propulsion.PROPELLER));
+            planeRepository.add(new GoldPlane(50, 250, 4, 600, Plane.Propulsion.PISTON, true));
+            try {
+                planeRepository.commit();
+            } catch (IOException e) {
+                System.out.println("No se pudo guardar aviones nuevos. Saliendo...");
+                e.printStackTrace();
+                return;
+            }
+        }else{
+            //System.out.println("Aviones: " + planeRepository.getAll());
+        }
+
+
+
+
 
 //
 //

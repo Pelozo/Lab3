@@ -2,15 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f9c96d9-228f-49ef-865e-acd5d32b0ce5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/something/something/repositories/plane/PlaneRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/something/something/repositories/plane/PlaneRepositoryContract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/BronzePlane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/BronzePlane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/SilverPlane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/SilverPlane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepositoryContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/flight/FlightRepositoryContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/flight/PlaneAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/PlaneAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/ui_questionmark/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/ui_questionmark/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,32 +66,42 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="734" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591929829645" />
-
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1592258450091">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="1020" y="306" key="#com.intellij.ide.util.MemberChooser" timestamp="1592281756047">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state x="1020" y="306" key="#com.intellij.ide.util.MemberChooser/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592281756047" />
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592258450091" />
-
     <state x="1009" y="487" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591929828301">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1009" y="487" key="#com.intellij.ide.util.TreeClassChooserDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1591929828301" />
-
-    <state width="1877" height="444" key="GridCell.Tab.0.bottom" timestamp="1592258671385">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="2500" height="213" key="GridCell.Tab.0.bottom" timestamp="1592283690193">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state width="2500" height="213" key="GridCell.Tab.0.bottom/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592283690193" />
     <state width="1877" height="444" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592258671385" />
-    <state width="1877" height="444" key="GridCell.Tab.0.center" timestamp="1592258671385">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="2500" height="213" key="GridCell.Tab.0.center" timestamp="1592283690193">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state width="2500" height="213" key="GridCell.Tab.0.center/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592283690193" />
     <state width="1877" height="444" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592258671385" />
-    <state width="1877" height="444" key="GridCell.Tab.0.left" timestamp="1592258671385">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="2500" height="213" key="GridCell.Tab.0.left" timestamp="1592283690193">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state width="2500" height="213" key="GridCell.Tab.0.left/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592283690193" />
     <state width="1877" height="444" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592258671385" />
-    <state width="1877" height="444" key="GridCell.Tab.0.right" timestamp="1592258671385">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="2500" height="213" key="GridCell.Tab.0.right" timestamp="1592283690193">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state width="2500" height="213" key="GridCell.Tab.0.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592283690193" />
     <state width="1877" height="444" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592258671385" />
+    <state x="975" y="527" key="com.intellij.ide.util.TipDialog" timestamp="1592271731240">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="975" y="527" key="com.intellij.ide.util.TipDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592271731240" />
+    <state x="1022" y="332" key="refactoring.ChangeSignatureDialog" timestamp="1592273964595">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1022" y="332" key="refactoring.ChangeSignatureDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592273964595" />
   </component>
 </project>

@@ -1,17 +1,21 @@
 package something.something.model.plane;
 
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class Plane{
+public abstract class Plane implements Serializable {
 
-    public enum Propulsion{ //i'd be great to know how the fuck this is translated but I ain't a plane engineer
+    public enum Propulsion{
         REACTION,
         PROPELLER,
         PISTON
     }
 
-    public static class InvalidCostException extends RuntimeException{}
 
+    public static class InvalidCostException extends RuntimeException{}
+    private String id = UUID.randomUUID().toString();
     private int fuelCapacity;
     private float costPerKm;
     private int passengerCapacity;
@@ -26,6 +30,9 @@ public abstract class Plane{
         setCostPerKm(costPerKm);
     }
 
+    public String getId() {
+        return id;
+    }
     public int getFuelCapacity() {
         return fuelCapacity;
     }
@@ -70,15 +77,39 @@ public abstract class Plane{
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plane plane = (Plane) o;
+        return id.equals(plane.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {
         return "Plane{" +
-                "fuelCapacity=" + fuelCapacity +
+                "id=" + id +
+                ", fuelCapacity=" + fuelCapacity +
                 ", costPerKm=" + costPerKm +
                 ", passengerCapacity=" + passengerCapacity +
                 ", maxSpeed=" + maxSpeed +
                 ", propulsion=" + propulsion +
                 '}';
+    }
+
+    public String getType(){
+        if(this instanceof GoldPlane){
+            return "Gold";
+        }else if(this instanceof SilverPlane){
+            return "Silver";
+        }else if(this instanceof BronzePlane){
+            return "Bronze";
+        }
+        return "asd";
     }
 }

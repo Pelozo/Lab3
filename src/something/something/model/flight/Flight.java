@@ -4,7 +4,9 @@ import something.something.model.plane.BronzePlane;
 import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
 import something.something.model.plane.SilverPlane;
+import something.something.repositories.plane.PlaneRepository;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -21,16 +23,6 @@ public class Flight implements Serializable {
         }
     }
 
-    public static class MaxCapacityException extends Exception{
-        private int maxCapacity;
-        public MaxCapacityException(int maxCapacity){
-            this.maxCapacity = maxCapacity;
-        }
-
-        public int getMaxCapacity() {
-            return maxCapacity;
-        }
-    }
 
     public static class OriginDestinyException extends Exception{
         private City origin;
@@ -47,23 +39,21 @@ public class Flight implements Serializable {
     private Date date;
     private City origin;
     private City destiny;
-    private Plane plane;
+    //para no tener que guardar todos los datos del avion cuando guardemos esto en un archivo, guardamos solamente el id
+    private String plane;
+    private transient Plane p;
     //para no tener que guardar todos los datos de los pasajeros cuando guardemos esto en un archivo, guardamos solamente el nombre de usuario y la cantidad de acompañantes
     private String clientUsername;
     private Integer companions;
 
-    public Flight(Date date, City origin, City destiny, Plane plane) throws OriginDestinyException{
+    public Flight(Date date, City origin, City destiny, String plane){
         setOrigin(origin);
         setDestiny(destiny);
         this.date = date;
-        this.plane = plane;
+        setPlane(plane);
     }
 
-    public void addPassagers(Client client, int companions) throws MaxCapacityException{
-        //Verifica si al avión le da la capacidad
-        if(1 + companions > plane.getPassengerCapacity()){
-            throw new MaxCapacityException(plane.getPassengerCapacity());
-        }
+    public void addPassagers(Client client, int companions){
         this.clientUsername = client.getUsername();
         this.companions = companions;
     }
@@ -106,10 +96,10 @@ public class Flight implements Serializable {
 
     public int planeTariff(){
         int tariff = 0;
-        if(plane instanceof BronzePlane)
+        if(p instanceof BronzePlane)
             tariff = 3000;
         else{
-            if(plane instanceof SilverPlane)
+            if(p instanceof SilverPlane)
                 tariff = 4000;
             else
                 tariff = 6000;
@@ -118,10 +108,10 @@ public class Flight implements Serializable {
     }
 
     public double calculateTotalCost(){
-        double total = (calculateKilometres(origin,destiny)*plane.getCostPerKm())+(companions*3500)+planeTariff();
-        return total;
+        return (calculateKilometres(origin, destiny) * p.getCostPerKm()) +
+                ((1 + companions) * 3500) +
+                planeTariff();
     }
-
 
     public String getID() {
         return ID;
@@ -139,33 +129,33 @@ public class Flight implements Serializable {
         return origin;
     }
 
-    public void setOrigin(City origin) throws OriginDestinyException {
-
-        if(origin.equals(this.destiny))
-            throw new OriginDestinyException(origin);
-        else{
+    public void setOrigin(City origin){
             this.origin = origin;
-        }
     }
 
     public City getDestiny() {
         return destiny;
     }
 
-    public void setDestiny(City destiny) throws OriginDestinyException {
-        if(this.origin.equals(destiny))
-            throw new OriginDestinyException(origin);
-        else{
-            this.destiny = destiny;
-        }
+    public void setDestiny(City destiny) {
+        this.destiny = destiny;
     }
 
-    public Plane getPlane() {
+    public String getPlane() {
         return plane;
     }
 
-    public void setPlane(Plane plane) {
-        this.plane = plane;
+    public void setPlane(String planeId){
+        PlaneRepository planeRepository;
+        try {
+            planeRepository = PlaneRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se pudo acceder al archivo Planes ni crear uno nuevo. Saliendo...");
+            e.printStackTrace();
+            return;
+        }
+        p = planeRepository.get(planeId);
+        plane = planeId;
     }
 
     public String getClientUsername() {
@@ -206,4 +196,5 @@ public class Flight implements Serializable {
                 ", companions=" + companions +
                 '}';
     }
+
 }
