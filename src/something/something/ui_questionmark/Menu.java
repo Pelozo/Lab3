@@ -7,6 +7,7 @@ import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
 import something.something.model.plane.SilverPlane;
 import something.something.repositories.client.ClientRepository;
+import something.something.repositories.flight.FlightRepository;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -121,6 +122,7 @@ public class Menu {
                 }
 
                 systemPause();
+                //TODO no hacer recursivo, acomodar
                 startMenu();
                 break;
             case 2:
@@ -262,6 +264,17 @@ public class Menu {
 
     //menu para contratar o cancelar un vuelo
     public void hireCancelFlightMenu(Client client) {
+
+        //instanciando repositorio vuelos
+        FlightRepository flights = null;
+        try {
+            flights = FlightRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se pudo leer el archivo de vuelos y no se pudo crear uno nuevo.\n Saliendo... ");
+            e.printStackTrace();
+            return;
+        }
+
         //TODO crear los Plane acá?
         BronzePlane bronze= new BronzePlane(100, 150, 4, 400, Plane.Propulsion.PISTON);
         SilverPlane silver= new SilverPlane(120, 230, 5, 550, Plane.Propulsion.PROPELLER);
@@ -299,14 +312,36 @@ public class Menu {
                 //TODO mostrar costo total de vuelo y pedir confirmacion
                 System.out.println("Costo total de vuelo: "+flight.calculateTotalCost());
                 System.out.println("Desea confirmar el vuelo?:");
+                //Guardo vuelo en Flight Repository
                 if (confirm()){
                     System.out.println("Vuelo confirmado");
+                    flights.add(flight);
+                    try{
+                        flights.commit();
+                    }
+                    catch (IOException e) {
+                        System.out.println("No se pudo escribir el archivo de vuelos...");
+                        e.printStackTrace();
+                    }
                 } else
-                    startMenu(); ///TODO si cancela el vuelo vuelve al menú principal
-
+                    startMenu(); ///TODO si no confirma el vuelo, vuelve al menú principal
                 break;
             case 2:
                 //TODO buscar cliente en el archivo de vuelos y cancelarlo
+                String ID = flights.searchID(client.getUsername());
+                if(ID == null)
+                    System.out.println("No existen vuelos contratados para este usuario.");
+                else{
+                    flights.remove(ID);
+                    try {
+                        flights.commit();
+                        System.out.println("Vuelo cancelado con exito!");
+                    }
+                    catch (IOException e){
+                        System.out.println("No se pudo cancelar el vuelo.");
+                        e.printStackTrace();
+                    }
+                }
                 break;
             default:
                 break;
