@@ -2,26 +2,21 @@ package something.something.repositories.flight;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import something.something.model.client.Client;
 import something.something.model.flight.Flight;
 import something.something.model.plane.Plane;
-import something.something.repositories.client.ClientRepository;
+import something.something.repositories.PlaneAdapter;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-//TODO
+
 public class FlightRepository implements FlightRepositoryContract {
 
     //nombre del archivo para guardar
@@ -47,7 +42,7 @@ public class FlightRepository implements FlightRepositoryContract {
 
     private void load() throws IOException {
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Plane.class, new PlaneAdapter());
+        builder.registerTypeAdapter(Plane.class, new PlaneAdapter<Plane>());
         Gson gson = builder.create();
         File flightsFile = new File(FILENAME);
         //si el archivo existe se leen los registros
@@ -123,4 +118,38 @@ public class FlightRepository implements FlightRepositoryContract {
         gson.toJson(flights, fw);
         fw.close();
     }
+
+    //devuelve todos los vuelos de acuerdo al nombre de usuario pasado por parametro
+    @Override
+    public List<Flight> getAllByUsername(String username) {
+        List<Flight> flightsForUser = new ArrayList<>();
+        for(Flight f: flights){
+            if(f.getClientUsername().equals(username)){
+                flightsForUser.add(f);
+            }
+        }
+        return flightsForUser;
+    }
+
+    //devuelve todos los vuelos que sean en el mismo dia que la fecha pasada por parametro
+    @Override
+    public List<Flight> getAllByDate(Date date) {
+        List<Flight> flightsByDate = new ArrayList<>();
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date);
+
+        Calendar cal2 = Calendar.getInstance();
+
+        for(Flight f: flights){
+            cal2.setTime(f.getDate());
+            boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                    cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+            if(sameDay)
+                flightsByDate.add(f);
+        }
+        return flightsByDate;
+    }
+
+
+
 }

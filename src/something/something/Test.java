@@ -6,6 +6,7 @@ import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
 import something.something.repositories.client.ClientRepository;
 import something.something.repositories.flight.FlightRepository;
+import something.something.repositories.plane.PlaneRepository;
 
 import java.io.IOException;
 import java.util.Date;
@@ -19,9 +20,9 @@ public class Test {
     public static void run(){
         testClientRepo();
         System.out.println("---");
-        testFlightRepo();
+        testFlightRepo(getPlaneRepo());
         System.out.println("---");
-        testFlight();
+        testFlight(getPlaneRepo());
     }
 
 
@@ -79,32 +80,22 @@ public class Test {
 
     }
 
-    public static void testFlightRepo(){
+    public static void testFlightRepo(PlaneRepository planeRepository){
         System.out.println("Testeando repo de clientes");
 
 
         //creo un avión con capacidad 4
         Plane plane = new GoldPlane(50,150,4, 600, Plane.Propulsion.PISTON, false);
-
+        planeRepository.add(plane);
         //creo un vuelo
-        Flight flight = null;
-        try {
-            flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
-        } catch (Flight.OriginDestinyException e) {
-            e.printStackTrace();
-        }
+        Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane.getId());
+
 
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
 
-        //agrego pasajero con 2 acompañantes
-        try {
-            flight.addPassagers(c, 2);
-            System.out.println("Máximo pasajeros: Ok");
-        } catch (Flight.MaxCapacityException e) {
-            System.out.println("Máximo pasajeros: !!!");
-            e.printStackTrace();
-        }
+        flight.addPassagers(c, 2);
+
 
         //get repo
         FlightRepository repo;
@@ -143,36 +134,22 @@ public class Test {
 
     }
 
-    public static void testFlight(){
+    public static void testFlight(PlaneRepository planeRepository){
+        System.out.println("Testeando vuelos");
         //creo un avión con capacidad 4
         Plane plane = new GoldPlane(50,150,4, 600, Plane.Propulsion.PISTON, false);
-
+        planeRepository.add(plane);
         //creo un vuelo
-        Flight flight = null;
-        try {
-            flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane);
-        } catch (Flight.OriginDestinyException e) {
-            e.printStackTrace();
-        }
+        Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane.getId());
+
 
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
 
-        //agrego pasajero con 6 acompañantes (deberia tirar error)
-        try {
-            flight.addPassagers(c, 6);
-            System.out.println("Maximo de pasajeros: !!!");
-        } catch (Flight.MaxCapacityException e) {
-            System.out.println("Maximo de pasajeros: Ok");
-        }
 
         //agrego pasajero con 2 acompañantes
-        try {
-            flight.addPassagers(c, 2);
-            System.out.println("Agregar pasajeros: Ok");
-        } catch (Flight.MaxCapacityException e) {
-            e.printStackTrace();
-        }
+        flight.addPassagers(c, 2);
+
 
         //calcular kilometros
         boolean calculateCost =
@@ -191,5 +168,17 @@ public class Test {
 
         System.out.println("Calcular kilometros: " + (calculateCost?"ok":"!!!"));
 
+    }
+
+    private static PlaneRepository getPlaneRepo(){
+        PlaneRepository planeRepository;
+        try {
+            planeRepository = PlaneRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se pudo acceder al archivo Planes ni crear uno nuevo. Saliendo...");
+            e.printStackTrace();
+            return null;
+        }
+        return planeRepository;
     }
 }

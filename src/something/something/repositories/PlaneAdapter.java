@@ -1,4 +1,4 @@
-package something.something.repositories.flight;
+package something.something.repositories;
 
 import com.google.gson.*;
 
