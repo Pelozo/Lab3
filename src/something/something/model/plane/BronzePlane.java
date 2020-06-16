@@ -6,9 +6,9 @@ public class BronzePlane extends Plane {
     }
 
     @Override
-    public String toString (){
+    public String toString(){
         return "BronzePlane{"+
-                super.toString()+
+                super.toString() +
                 "}";
     }
 }

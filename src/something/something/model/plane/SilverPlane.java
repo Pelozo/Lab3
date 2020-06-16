@@ -6,9 +6,9 @@ public class SilverPlane extends Plane implements Catering {
     }
 
     @Override
-    public String toString (){
+    public String toString(){
         return "SilverPlane{"+
-                super.toString()+
+                super.toString() +
                 "}";
     }
 }
