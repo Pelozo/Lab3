@@ -21,8 +21,6 @@ public class ClientRepository implements ClientRepositoryContract {
     //guardar instancia del singleton
     private static ClientRepository instance = null;
 
-    //excepción a tirar si el cliente ya existe
-    public static class ClientAlreadyRegistered extends Exception{}
 
     //en el constructor de cargan los datos del archivo
     //TODO sacar el load y llamarlo aparte?

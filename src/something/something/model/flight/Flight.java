@@ -21,6 +21,11 @@ public class Flight implements Serializable {
         City(String name) {
             this.name = name;
         }
+
+        @Override
+        public String toString(){
+            return this.name;
+        }
     }
 
 
@@ -41,10 +46,11 @@ public class Flight implements Serializable {
     private City destiny;
     //para no tener que guardar todos los datos del avion cuando guardemos esto en un archivo, guardamos solamente el id
     private String plane;
-    private transient Plane p;
     //para no tener que guardar todos los datos de los pasajeros cuando guardemos esto en un archivo, guardamos solamente el nombre de usuario y la cantidad de acompañantes
     private String clientUsername;
     private Integer companions;
+    private float planeTariff;
+    private float planeCostPerKm;
 
     public Flight(Date date, City origin, City destiny, String plane){
         setOrigin(origin);
@@ -94,23 +100,14 @@ public class Flight implements Serializable {
         return kilometres;
     }
 
-    public int planeTariff(){
-        int tariff = 0;
-        if(p instanceof BronzePlane)
-            tariff = 3000;
-        else{
-            if(p instanceof SilverPlane)
-                tariff = 4000;
-            else
-                tariff = 6000;
-        }
-        return tariff;
+    public float getPlaneTariff(){
+        return planeTariff;
     }
 
     public double calculateTotalCost(){
-        return (calculateKilometres(origin, destiny) * p.getCostPerKm()) +
+        return (calculateKilometres(origin, destiny) * planeCostPerKm) +
                 ((1 + companions) * 3500) +
-                planeTariff();
+                getPlaneTariff();
     }
 
     public String getID() {
@@ -154,8 +151,10 @@ public class Flight implements Serializable {
             e.printStackTrace();
             return;
         }
-        p = planeRepository.get(planeId);
+        Plane p = planeRepository.get(planeId);
         plane = planeId;
+        planeTariff = p.getType().getCost();
+        planeCostPerKm = p.getCostPerKm();
     }
 
     public String getClientUsername() {
@@ -188,13 +187,15 @@ public class Flight implements Serializable {
     @Override
     public String toString() {
         return "Flight{" +
-                "date=" + date +
+                "ID='" + ID + '\'' +
+                ", date=" + date +
                 ", origin=" + origin +
                 ", destiny=" + destiny +
-                ", plane=" + plane +
-                ", clientUsername=" + clientUsername +
+                ", plane='" + plane + '\'' +
+                ", clientUsername='" + clientUsername + '\'' +
                 ", companions=" + companions +
+                ", planeTariff=" + planeTariff +
+                ", planeCostPerKm=" + planeCostPerKm +
                 '}';
     }
-
 }

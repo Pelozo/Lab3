@@ -13,6 +13,21 @@ public abstract class Plane implements Serializable {
         PISTON
     }
 
+    public enum Type{
+        BRONZE(3000),
+        SILVER(4000),
+        GOLD(6000);
+
+        private final float cost;
+        Type(float cost){
+            this.cost = cost;
+        }
+
+        public float getCost() {
+            return cost;
+        }
+    }
+
 
     public static class InvalidCostException extends RuntimeException{}
     private String id = UUID.randomUUID().toString();
@@ -21,6 +36,7 @@ public abstract class Plane implements Serializable {
     private int passengerCapacity;
     private int maxSpeed;
     private Propulsion propulsion;
+    private Type type;
 
     public Plane(int fuelCapacity, float costPerKm, int passengerCapacity, int maxSpeed, Propulsion propulsion) throws InvalidCostException {
         this.fuelCapacity = fuelCapacity;
@@ -28,6 +44,7 @@ public abstract class Plane implements Serializable {
         this.maxSpeed = maxSpeed;
         this.propulsion = propulsion;
         setCostPerKm(costPerKm);
+        setType();
     }
 
     public String getId() {
@@ -102,14 +119,19 @@ public abstract class Plane implements Serializable {
                 '}';
     }
 
-    public String getType(){
+    public void setType(){
         if(this instanceof GoldPlane){
-            return "Gold";
+            type = Type.GOLD;
         }else if(this instanceof SilverPlane){
-            return "Silver";
+            type = Type.SILVER;
         }else if(this instanceof BronzePlane){
-            return "Bronze";
+            type = Type.BRONZE;
         }
-        return "asd";
     }
+
+    public Plane.Type getType(){
+        return type;
+    }
+
+
 }
