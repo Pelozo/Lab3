@@ -18,8 +18,8 @@ public class Client implements Serializable {
     private String lastName;
     private String dni;
     private int age;
-    private Plane bestPlaneUsed; //TODO
-    private float totalSpent; //TODO
+    private Plane.Type bestPlaneUsed = null;
+    private float totalSpent;
 
 
     public Client(String username) {
@@ -120,21 +120,25 @@ public class Client implements Serializable {
         totalSpent+=flightCost;
     }
 
-    public void setBestPlaneUsed (Plane aux){ //Le paso por parámetro Flight.getPlane()
+    public void setBestPlaneUsed (Plane.Type aux){
+        if(aux == null) {
+            bestPlaneUsed = null;
+            return;
+        }
         if (bestPlaneUsed == null) {
-            bestPlaneUsed=aux;
+            bestPlaneUsed = aux;
         } else {
-            if (!(bestPlaneUsed instanceof GoldPlane)){
-                if (bestPlaneUsed instanceof BronzePlane && aux instanceof SilverPlane)
+            if (!(bestPlaneUsed == Plane.Type.GOLD)){
+                if (bestPlaneUsed == Plane.Type.BRONZE && aux == Plane.Type.SILVER)
                     bestPlaneUsed=aux;
                 else
-                    if (bestPlaneUsed instanceof SilverPlane && aux instanceof GoldPlane)
+                    if (bestPlaneUsed ==  Plane.Type.SILVER && aux == Plane.Type.GOLD)
                         bestPlaneUsed=aux;
             }
         }
     }
 
-    public Plane getBestPlaneUsed(){
+    public Plane.Type getBestPlaneUsed(){
         return bestPlaneUsed;
     }
 

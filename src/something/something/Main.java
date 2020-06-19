@@ -6,6 +6,7 @@ import something.something.model.plane.BronzePlane;
 import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
 import something.something.model.client.Client;
+import something.something.repositories.client.ClientRepository;
 import something.something.repositories.flight.FlightRepository;
 import something.something.model.plane.SilverPlane;
 import something.something.repositories.plane.PlaneRepository;
@@ -22,12 +23,30 @@ public class Main {
 
         //Test.run();
 
+        ClientRepository clientRepository;
+        try {
+            clientRepository = ClientRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se puedo leear el archivo de clientes ni generar uno nuevo. Saliendo...");
+            e.printStackTrace();
+            return;
+        }
+
+        FlightRepository flightRepository;
+        try {
+            flightRepository = FlightRepository.getInstance();
+        } catch (IOException e) {
+            System.out.println("No se puedo leear el archivo de vuelos ni generar uno nuevo. Saliendo...");
+            e.printStackTrace();
+            return;
+        }
+
 
         PlaneRepository planeRepository;
         try {
             planeRepository = PlaneRepository.getInstance();
         } catch (IOException e) {
-            System.out.println("No se pudo acceder al archivo Planes ni crear uno nuevo. Saliendo...");
+            System.out.println("No se pudo acceder al archivo de aviones ni crear uno nuevo. Saliendo...");
             e.printStackTrace();
             return;
         }
@@ -46,6 +65,10 @@ public class Main {
             }
         }
 
+        //printFlightsByDate(flightRepository);
+        printAllClients(clientRepository);
+        System.out.println("----\n\n");
+        printFlight(flightRepository);
 
 
 //
@@ -100,9 +123,74 @@ public class Main {
 //        c.setBestPlaneUsed(plane2);
 //        System.out.println("El mejor avión usado por el cliente fue: "+c.getBestPlaneUsed());
 
-            Menu menu = new Menu();
-            menu.startMenu();
+
+            Menu.startMenu(clientRepository,flightRepository, planeRepository);
 
 
     }
+        /*
+        El sistema realiza algunas salidas con información sobre vuelos y clientes. Se
+        solicita generar un método para listar todos los vuelos programados en una fecha dada y
+        generar otro método para listar todos los clientes indicando por cada uno:
+        ● Todos los datos personales.
+        ● La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
+        ● Total gastado de todos sus vuelos.
+         */
+       private static void printFlightsByDate(FlightRepository flightRepository){
+
+           System.out.println("Ingrese fecha");
+           Date date = Menu.askForDate();
+
+           List<Flight> flights = flightRepository.getAllByDate(date);
+           if(flights.isEmpty()){
+               System.out.println("No hubo vuelos ese día");
+           }else{
+               for(Flight flight: flights){
+                   System.out.println("Vuelo id: " + flight.getID());
+                   System.out.println("Fecha: " + flight.getDate());
+                   System.out.println("Recorrido: " + flight.getOrigin() + " - " + flight.getDestiny());
+                   System.out.println("Avión id: " + flight.getPlane());
+                   System.out.println("Reservado por cliente: " + flight.getClientUsername());
+                   System.out.println("Acompañantes: " + flight.getCompanions());
+               }
+           }
+       }
+       private static void printAllClients(ClientRepository clientRepository){
+
+           List<Client> clients = clientRepository.getAll();
+
+           if(clients.isEmpty()){
+               System.out.println("No hay clientes registrados");
+           }else{
+               for(Client client: clients){
+                   System.out.println("Usuario: " + client.getUsername());
+                   System.out.println("Nombre: " + client.getFirstName());
+                   System.out.println("Apellido: " + client.getLastName());
+                   System.out.println("DNI: " + client.getDni());
+                   System.out.println("Edad: " + client.getAge());
+                   System.out.println("Total gastado: " + client.getTotalSpent());
+                   System.out.println("Mejor vuelo contratado: " + client.getBestPlaneUsed());
+               }
+           }
+       }
+
+    private static void printFlight(FlightRepository flightRepository){
+
+
+        List<Flight> flights = flightRepository.getAll();
+        if(flights.isEmpty()){
+            System.out.println("No hubo vuelos ese día");
+        }else{
+            for(Flight flight: flights){
+                System.out.println(flight);
+                System.out.println("Vuelo id: " + flight.getID());
+                System.out.println("Fecha: " + flight.getDate());
+                System.out.println("Recorrido: " + flight.getOrigin() + " - " + flight.getDestiny());
+                System.out.println("Avión id: " + flight.getPlane());
+                System.out.println("Reservado por cliente: " + flight.getClientUsername());
+                System.out.println("Acompañantes: " + flight.getCompanions());
+            }
+        }
+    }
+
 }

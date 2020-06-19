@@ -44,7 +44,7 @@ public class PlaneRepository implements PlaneRepositoryContract{
 
     private void load() throws IOException {
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Plane.class, new PlaneAdapter<>());
+        builder.registerTypeAdapter(Plane.class, new PlaneAdapter<Plane>());
         Gson gson = builder.create();
         File flightsFile = new File(FILENAME);
         //si el archivo existe se leen los registros
@@ -106,9 +106,7 @@ public class PlaneRepository implements PlaneRepositoryContract{
 
     @Override
     public void commit() throws IOException {
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Plane.class, new PlaneAdapter());
-        Gson gson = builder.create();
+        Gson gson = new Gson();
         Type type = new TypeToken<List<Plane>>(){}.getType();
         FileWriter fw = new FileWriter(FILENAME);
         gson.toJson(planes, type, fw);
