@@ -4,6 +4,7 @@ import something.something.model.client.Client;
 import something.something.model.flight.Flight;
 import something.something.model.plane.GoldPlane;
 import something.something.model.plane.Plane;
+import something.something.model.plane.SilverPlane;
 import something.something.repositories.client.ClientRepository;
 import something.something.repositories.flight.FlightRepository;
 import something.something.repositories.plane.PlaneRepository;
@@ -16,7 +17,6 @@ import java.util.UUID;
 // a falta de Junit...
 public class Test {
 
-
     public static void run(){
         testClientRepo();
         System.out.println("---");
@@ -24,7 +24,6 @@ public class Test {
         System.out.println("---");
         testFlight(getPlaneRepo());
     }
-
 
     public static void testClientRepo(){
         System.out.println("Testeando repo de clientes");
@@ -49,7 +48,7 @@ public class Test {
         repository.add(new Client(USER, "12mmm345","Leo33", "Pelggdsdozo", "as33d", 33));
 
         int u = 0;
-        for(Client cli :repository.getAll()){
+        for(Client cli: repository.getAll()){
             if(cli.getUsername().equals(USER)) u++;
         }
         System.out.println("Solo un usuario: " + (u == 1?"Ok":"!!!"));
@@ -90,12 +89,10 @@ public class Test {
         //creo un vuelo
         Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane.getId());
 
-
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
 
         flight.addPassagers(c, 2);
-
 
         //get repo
         FlightRepository repo;
@@ -142,14 +139,11 @@ public class Test {
         //creo un vuelo
         Flight flight = new Flight(new Date(), Flight.City.BSAS, Flight.City.MONTEVIDEO, plane.getId());
 
-
         //creo un cliente
         Client c = new Client("pelozo", "12345","Leo", "Pelozo", "asd", 26);
 
-
         //agrego pasajero con 2 acompañantes
         flight.addPassagers(c, 2);
-
 
         //calcular kilometros
         boolean calculateCost =
@@ -167,6 +161,21 @@ public class Test {
                 flight.calculateKilometres(Flight.City.SANTIAGO, Flight.City.MONTEVIDEO) == 2100;
 
         System.out.println("Calcular kilometros: " + (calculateCost?"ok":"!!!"));
+
+
+        //calculate total cost
+        //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo de avión)
+
+        boolean test1 = flight.getTotalCost() == (950 * 150) + (3 * 3500) + 6000;
+
+        Plane silverPlane = new SilverPlane(50,152,15, 600, Plane.Propulsion.PISTON);
+        planeRepository.add(silverPlane);
+        Flight flight2 = new Flight(new Date(), Flight.City.SANTIAGO, Flight.City.MONTEVIDEO, silverPlane.getId());
+        flight2.addPassagers(new Client("asd"), 14);
+
+        boolean test2 = flight2.getTotalCost() == (2100 * 152) + (15 * 3500) + 4000;
+
+        System.out.println("Calcular costo total: " + ((test1 && test2)?"ok":"!!!"));
 
     }
 

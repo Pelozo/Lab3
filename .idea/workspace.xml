@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f9c96d9-228f-49ef-865e-acd5d32b0ce5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/model/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/something/something/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/flight/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/model/plane/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/PlaneAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/client/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/something/something/repositories/plane/PlaneRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/repositories/plane/PlaneRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/something/something/ui_questionmark/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/something/something/ui_questionmark/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,25 +88,25 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state x="1010" y="450" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592539103834" />
-    <state width="2516" height="216" key="GridCell.Tab.0.bottom" timestamp="1592543062069">
+    <state width="2516" height="216" key="GridCell.Tab.0.bottom" timestamp="1592641891352">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="216" key="GridCell.Tab.0.bottom/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592543062069" />
+    <state width="2516" height="216" key="GridCell.Tab.0.bottom/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592641891352" />
     <state width="1535" height="555" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592276716966" />
-    <state width="2516" height="216" key="GridCell.Tab.0.center" timestamp="1592543062069">
+    <state width="2516" height="216" key="GridCell.Tab.0.center" timestamp="1592641891352">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="216" key="GridCell.Tab.0.center/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592543062069" />
+    <state width="2516" height="216" key="GridCell.Tab.0.center/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592641891352" />
     <state width="1535" height="555" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592276716966" />
-    <state width="2516" height="216" key="GridCell.Tab.0.left" timestamp="1592543062069">
+    <state width="2516" height="216" key="GridCell.Tab.0.left" timestamp="1592641891352">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="216" key="GridCell.Tab.0.left/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592543062069" />
+    <state width="2516" height="216" key="GridCell.Tab.0.left/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592641891352" />
     <state width="1535" height="555" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592276716966" />
-    <state width="2516" height="216" key="GridCell.Tab.0.right" timestamp="1592543062069">
+    <state width="2516" height="216" key="GridCell.Tab.0.right" timestamp="1592641891352">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state width="2516" height="216" key="GridCell.Tab.0.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592543062069" />
+    <state width="2516" height="216" key="GridCell.Tab.0.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592641891352" />
     <state width="1535" height="555" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592276716966" />
     <state width="2516" height="490" key="GridCell.Tab.1.bottom" timestamp="1592513541067">
       <screen x="0" y="0" width="2560" height="1410" />
@@ -129,10 +124,14 @@
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
     <state width="2516" height="490" key="GridCell.Tab.1.right/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592513541067" />
-    <state x="975" y="628" key="com.intellij.ide.util.TipDialog" timestamp="1592513553371">
+    <state x="975" y="628" key="com.intellij.ide.util.TipDialog" timestamp="1592636092442">
       <screen x="0" y="0" width="2560" height="1410" />
     </state>
-    <state x="975" y="628" key="com.intellij.ide.util.TipDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592513553371" />
+    <state x="975" y="628" key="com.intellij.ide.util.TipDialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592636092442" />
+    <state x="1010" y="473" key="extract.method.dialog" timestamp="1592638949963">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1010" y="473" key="extract.method.dialog/-1920.267.1920.1050/0.0.2560.1410@0.0.2560.1410" timestamp="1592638949963" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TP_Lab3$Main.ic" NAME="Main Coverage Results" MODIFIED="1592513514227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -28,23 +28,29 @@ public class Flight implements Serializable {
         }
     }
 
+    private final Map<String, Map<String, Integer>> distances2 = Collections.unmodifiableMap(new HashMap<String, Map<String, Integer>>() {{
+        put("Buenos Aires",
+                Collections.unmodifiableMap(new HashMap<String, Integer>() {{
+                    put("Córdoba", 695);
+                    put("Santiago", 1400);
+                    put("Montevideo", 950);
+                }}));
+        put("Córdoba",
+                Collections.unmodifiableMap(new HashMap<String, Integer>() {{
+                    put("Montevideo", 1190);
+                    put("Santiago", 1050);
+                }}));
+        put("Santiago",
+                Collections.unmodifiableMap(new HashMap<String, Integer>() {{
+                    put("Montevideo", 2100);
+                }}));
+    }});
 
-    public static class OriginDestinyException extends Exception{
-        private City origin;
-        public OriginDestinyException(City origin){
-            this.origin = origin;
-        }
-
-        public City getOrigin(){
-            return origin;
-        }
-    }
 
     private String ID = UUID.randomUUID().toString();
     private Date date;
     private City origin;
     private City destiny;
-    //para no tener que guardar todos los datos del avion cuando guardemos esto en un archivo, guardamos solamente el id
     private String plane;
     //para no tener que guardar todos los datos de los pasajeros cuando guardemos esto en un archivo, guardamos solamente el nombre de usuario y la cantidad de acompañantes
     private String clientUsername;
@@ -70,41 +76,19 @@ public class Flight implements Serializable {
     }
 
 
-    public int calculateKilometres(City origin,City destiny){
-        int kilometres = 0;
-        if(origin == City.BSAS){
-            if(destiny == City.CORDOBA)
-                kilometres = 695;
-            else{
-                if(destiny == City.SANTIAGO)
-                    kilometres = 1400;
-                else{
-                    if(destiny == City.MONTEVIDEO)
-                        kilometres = 950;
-                }
-            }
-        }else{
-            if(origin == City.CORDOBA){
-                if(destiny == City.MONTEVIDEO)
-                    kilometres = 1190;
-                else{
-                    if(destiny == City.SANTIAGO)
-                        kilometres = 1050;
-                }
-            }
-            else{
-                if(origin == City.MONTEVIDEO)
-                    kilometres = 2100;
-            }
+    public int calculateKilometres(City origin, City destiny){
+        try {
+            return  distances2.get(origin.name).get(destiny.name);
+        }catch (NullPointerException e){
+            return distances2.get(destiny.name).get(origin.name);
         }
-        return kilometres;
     }
 
     public float getPlaneTariff(){
         return planeTariff;
     }
 
-    public double calculateTotalCost(){
+    public double getTotalCost(){
         return (calculateKilometres(origin, destiny) * planeCostPerKm) +
                 ((1 + companions) * 3500) +
                 getPlaneTariff();
