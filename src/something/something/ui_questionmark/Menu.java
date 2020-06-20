@@ -284,7 +284,7 @@ public class Menu {
         //Agregamos a los pasajeros
         flight.addPassagers(client, companions);
         //Mostramos el costo total
-        System.out.println("Costo total de vuelo: " + flight.calculateTotalCost());
+        System.out.println("Costo total de vuelo: " + flight.getTotalCost());
         //Pedimos confirmación
         System.out.println("¿Desea confirmar el vuelo?");
         if (confirm()) {
@@ -292,7 +292,7 @@ public class Menu {
 
             try {
                 flightRepository.commit();
-                client.setTotalSpent(client.getTotalSpent() + (float)flight.calculateTotalCost());
+                client.setTotalSpent(client.getTotalSpent() + (float)flight.getTotalCost());
                 client.setBestPlaneUsed(plane.getType());
                 clientRepository.replace(client);
                 clientRepository.commit();
@@ -308,12 +308,11 @@ public class Menu {
     //Menu para cancelar vuelos
     private static void cancelFlight(Client client, FlightRepository flightRepository, ClientRepository clientRepository, PlaneRepository planeRepository){
 
-        //mostramos todos los vuelos del usuario
+        //recuperamos todos los vuelos del usuario
         List<Flight> flightForClient = flightRepository.getAllByUsername(client.getUsername());
 
-        //TODO borramos todos los que ya hayan pasado
-
-
+        //borramos todos los que ya hayan pasado
+        flightForClient.removeIf(flight -> flight.getDate().before(new Date()));
 
         //si no tiene vuelos muestro mensaje y salgo
         if (flightForClient.isEmpty()) {
@@ -344,10 +343,10 @@ public class Menu {
                     try {
                         flightRepository.commit();
                         //resta del total gastado
-                        client.setTotalSpent(client.getTotalSpent() - (float)flightForClient.get(selectedOption - 1).calculateTotalCost());
+                        client.setTotalSpent(client.getTotalSpent() - (float)flightForClient.get(selectedOption - 1).getTotalCost());
                         //si borramos un vuelo puede ser que sea el mejor vuelo del usuario,
                         // asi que vamos a tener que ver todos sus vuelos anteriores para ver el mejor (o null si este cancelado fue el único)
-                        client.setBestPlaneUsed(null); //TODO no funciona
+                        client.setBestPlaneUsed(null);
                         List<Flight> allFlightForClient = flightRepository.getAllByUsername(client.getUsername());
                         for(Flight flight: allFlightForClient){
                             Plane plane = planeRepository.get(flight.getPlane());

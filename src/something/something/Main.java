@@ -66,9 +66,9 @@ public class Main {
         }
 
         //printFlightsByDate(flightRepository);
-        printAllClients(clientRepository);
-        System.out.println("----\n\n");
-        printFlight(flightRepository);
+        //printAllClients(clientRepository);
+        //System.out.println("----\n\n");
+        //printFlight(flightRepository);
 
 
 //
@@ -126,7 +126,6 @@ public class Main {
 
             Menu.startMenu(clientRepository,flightRepository, planeRepository);
 
-
     }
         /*
         El sistema realiza algunas salidas con información sobre vuelos y clientes. Se
@@ -136,7 +135,7 @@ public class Main {
         ● La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
         ● Total gastado de todos sus vuelos.
          */
-       private static void printFlightsByDate(FlightRepository flightRepository){
+        private static void printFlightsByDate(FlightRepository flightRepository){
 
            System.out.println("Ingrese fecha");
            Date date = Menu.askForDate();
@@ -155,7 +154,7 @@ public class Main {
                }
            }
        }
-       private static void printAllClients(ClientRepository clientRepository){
+        private static void printAllClients(ClientRepository clientRepository){
 
            List<Client> clients = clientRepository.getAll();
 
@@ -173,8 +172,7 @@ public class Main {
                }
            }
        }
-
-    private static void printFlight(FlightRepository flightRepository){
+        private static void printFlight(FlightRepository flightRepository){
 
 
         List<Flight> flights = flightRepository.getAll();
