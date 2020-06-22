@@ -2,10 +2,7 @@ package something.something.ui_questionmark;
 
 import something.something.model.client.Client;
 import something.something.model.flight.Flight;
-import something.something.model.plane.BronzePlane;
-import something.something.model.plane.GoldPlane;
-import something.something.model.plane.Plane;
-import something.something.model.plane.SilverPlane;
+import something.something.model.plane.*;
 import something.something.repositories.client.ClientRepository;
 import something.something.repositories.flight.FlightRepository;
 import something.something.repositories.plane.PlaneRepository;
@@ -26,7 +23,7 @@ public class Menu {
         new java.util.Scanner(System.in).nextLine();
     }
 
-    public Menu() {
+    private Menu() {
     }
 
     //imprime en pantalla la lista de opciones
@@ -36,6 +33,7 @@ public class Menu {
         }
         System.out.println("0. Volver");
     }
+
     //imprime en pantalla la lista de opciones y espera por una opcion válida
     private static int printAndWaitAnswer(List<?> options) {
 
@@ -72,23 +70,98 @@ public class Menu {
         do {
             selectedOption = printAndWaitAnswer(Arrays.asList(
                     "Registrarse",
-                    "Iniciar sesión"));
+                    "Iniciar sesión",
+                    "Modo Admin"));
             switch (selectedOption) {
                 case 1:
                     registerClient(clientRepository);
                     break;
                 case 2:
                     Client loggedClient = loginClient(clientRepository);
-                    if(loggedClient != null){
+                    if (loggedClient != null) {
                         hireCancelFlightMenu(loggedClient, flightRepository, clientRepository, planeRepository);
-                    }else{
+                    } else {
                         systemPause();
                     }
+                    break;
+                case 3:
+                    menuAdmin(flightRepository,clientRepository);
                     break;
                 default:
                     break;
             }
-        }while(selectedOption != 0);
+        } while (selectedOption != 0);
+    }
+
+    //Menu Admin
+    public static void menuAdmin(FlightRepository flightRepository,ClientRepository clientRepository){
+        int selectedOption;
+
+        do {
+            selectedOption = printAndWaitAnswer(Arrays.asList(
+                    "Mostrar vuelos por fecha",
+                    "Mostrar todos los clientes"));
+            switch (selectedOption) {
+                case 1:
+                    printFlightsByDate(flightRepository);
+                    break;
+                case 2:
+                    printAllClients(clientRepository);
+                    break;
+                default:
+                    break;
+            }
+        } while (selectedOption != 0);
+    }
+
+     /*
+    El sistema realiza algunas salidas con información sobre vuelos y clientes. Se
+    solicita generar un método para listar todos los vuelos programados en una fecha dada y
+    generar otro método para listar todos los clientes indicando por cada uno:
+    ● Todos los datos personales.
+    ● La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
+    ● Total gastado de todos sus vuelos.
+    */
+
+    private static void printFlightsByDate(FlightRepository flightRepository) {
+
+        System.out.println("Ingrese fecha");
+        Date date = Menu.askForDate();
+
+        List<Flight> flights = flightRepository.getAllByDate(date);
+        if (flights.isEmpty()) {
+            System.out.println("No hubo vuelos ese día");
+        } else {
+            for (Flight flight : flights) {
+                System.out.println("Vuelo id: " + flight.getID());
+                System.out.println("Fecha: " + flight.getDate());
+                System.out.println("Recorrido: " + flight.getOrigin() + " - " + flight.getDestiny());
+                System.out.println("Avión id: " + flight.getPlane());
+                System.out.println("Reservado por cliente: " + flight.getClientUsername());
+                System.out.println("Acompañantes: " + flight.getCompanions());
+                System.out.println("------------------------------------------------------------");
+            }
+        }
+    }
+
+    private static void printAllClients(ClientRepository clientRepository) {
+
+        List<Client> clients = clientRepository.getAll();
+
+        if (clients.isEmpty()) {
+            System.out.println("No hay clientes registrados");
+        } else {
+            for (Client client : clients) {
+                System.out.println("Usuario: " + client.getUsername());
+                System.out.println("Nombre: " + client.getFirstName());
+                System.out.println("Apellido: " + client.getLastName());
+                System.out.println("DNI: " + client.getDni());
+                System.out.println("Edad: " + client.getAge());
+                System.out.println("Total gastado: " + client.getTotalSpent());
+                System.out.println("Mejor vuelo contratado: " + client.getBestPlaneUsed());
+                System.out.println("------------------------------------------------------------");
+            }
+        }
     }
 
     //Menu de inicio de sesión
@@ -125,8 +198,8 @@ public class Menu {
 
         //muestro la lista y devuelvo la seleccionada por el usuario
         int selectedOrigin = printAndWaitAnswer(cities);
-        if(selectedOrigin == 0 )
-            return  null;
+        if (selectedOrigin == 0)
+            return null;
         return cities.get(selectedOrigin - 1);
 
     }
@@ -142,7 +215,7 @@ public class Menu {
 
         //muestro la lista y devuelvo la seleccionada por el usuario
         int selectedDestiny = printAndWaitAnswer(cities);
-        if(selectedDestiny == 0){
+        if (selectedDestiny == 0) {
             return null;
         }
         return cities.get(selectedDestiny - 1);
@@ -150,7 +223,7 @@ public class Menu {
     }
 
     //menu para registrar usuario
-    private static void registerClient(ClientRepository clientRepository){
+    private static void registerClient(ClientRepository clientRepository) {
         System.out.println("Fase de Registro:");
         String firstName;
         String lastName;
@@ -191,18 +264,17 @@ public class Menu {
         }
     }
 
-    private static boolean confirm (){
-        boolean confirm= false;
+    private static boolean confirm() {
+        boolean confirm = false;
         switch (printAndWaitAnswer(Arrays.asList(
                 "Sí",
-                "No")))
-        {
+                "No"))) {
             case 1:
-                confirm=true;
+                confirm = true;
                 break;
 
             case 2:
-                confirm=false;
+                confirm = false;
                 break;
         }
         return confirm;
@@ -213,40 +285,40 @@ public class Menu {
 
         int selectedOption = -1;
 
-        do{
+        do {
             selectedOption = printAndWaitAnswer(Arrays.asList(
                     "Contratar vuelo",
                     "Cancelar vuelo"));
 
             switch (selectedOption) {
-            case 1://contratar vuelo
-                hireFlight(client,flightRepository,planeRepository, clientRepository);
-                break;
-            case 2://cancelar vuelo
-                cancelFlight(client,flightRepository, clientRepository, planeRepository);
-                break;
-            default:
-                break;
-        }
+                case 1://contratar vuelo
+                    hireFlight(client, flightRepository, planeRepository, clientRepository);
+                    break;
+                case 2://cancelar vuelo
+                    cancelFlight(client, flightRepository, clientRepository, planeRepository);
+                    break;
+                default:
+                    break;
+            }
 
-        }while(selectedOption != 0);
+        } while (selectedOption != 0);
 
 
     }
 
-    private static void hireFlight(Client client, FlightRepository flightRepository, PlaneRepository planeRepository, ClientRepository clientRepository){
+    private static void hireFlight(Client client, FlightRepository flightRepository, PlaneRepository planeRepository, ClientRepository clientRepository) {
         //pide la fecha del vuelo
         Date date = askForDateAndTime("- Ingrese la fecha en la que desea viajar, ");
         //selecciona origin y destiny
         System.out.println("- Seleccione la ciudad de Origen del vuelo: ");
         Flight.City origin = selectOrigin();
-        if(origin == null){
+        if (origin == null) {
             return;
         }
         System.out.println("Origen seleccionado: " + origin);
         System.out.println("- Seleccione la ciudad de Destino del vuelo: ");
         Flight.City destiny = selectDestiny(origin);
-        if(destiny == null){
+        if (destiny == null) {
             return;
         }
         System.out.println("- Ingrese la cantidad de acompañantes: ");
@@ -260,21 +332,26 @@ public class Menu {
         //lista de vuelos en esa fecha
         List<Flight> unavailableFlights = flightRepository.getAllByDate(date);
         //Le restamos a la lista de aviones que pueden llevar acompañantes todos los aviones que ya están resevados en esa fecha
-        for(Flight f: unavailableFlights){
+        for (Flight f : unavailableFlights) {
             availablePlanes.remove(planeRepository.get(f.getPlane()));
         }
-        if(availablePlanes.isEmpty()){
+        if (availablePlanes.isEmpty()) {
             System.out.println("No hay aviones disponibles con las caracteristicas necesitarias en esa fecha");
             return;
         }
         System.out.println("- Seleccione el avión: ");
         //mostramos la lista
         List<String> options = new ArrayList<>();
-        for(Plane p: availablePlanes){
-            options.add("Tipo: " + p.getType() + ", Capacidad: " + p.getPassengerCapacity() + ", Velocidad: " + p.getMaxSpeed());
+        for (Plane p : availablePlanes) {
+            options.add("Tipo: " + p.getType() +
+                    ", Capacidad: " + p.getPassengerCapacity()
+                    + ", Velocidad: " + p.getMaxSpeed() +
+                    ((p instanceof Catering) ? " (Catering)" : "" + "") +
+                    ((p instanceof GoldPlane && ((GoldPlane) p).getHasWifi()) ? " (Wifi)" : "")
+            );
         }
         int selectedPlane = printAndWaitAnswer(options);
-        if(selectedPlane == 0){
+        if (selectedPlane == 0) {
             return;
         }
         //seleccionamos el avion
@@ -292,7 +369,7 @@ public class Menu {
 
             try {
                 flightRepository.commit();
-                client.setTotalSpent(client.getTotalSpent() + (float)flight.getTotalCost());
+                client.setTotalSpent(client.getTotalSpent() + (float) flight.getTotalCost());
                 client.setBestPlaneUsed(plane.getType());
                 clientRepository.replace(client);
                 clientRepository.commit();
@@ -306,7 +383,7 @@ public class Menu {
     }
 
     //Menu para cancelar vuelos
-    private static void cancelFlight(Client client, FlightRepository flightRepository, ClientRepository clientRepository, PlaneRepository planeRepository){
+    private static void cancelFlight(Client client, FlightRepository flightRepository, ClientRepository clientRepository, PlaneRepository planeRepository) {
 
         //recuperamos todos los vuelos del usuario
         List<Flight> flightForClient = flightRepository.getAllByUsername(client.getUsername());
@@ -318,9 +395,9 @@ public class Menu {
         if (flightForClient.isEmpty()) {
             System.out.println("No tiene vuelos para cancelar");
             systemPause();
-        //si tiene vuelos para cancelar los mostramos y le damos la opcion de seleccionar uno
+            //si tiene vuelos para cancelar los mostramos y le damos la opcion de seleccionar uno
         } else {
-            System.out.println("Vuelos reservados: ");
+            System.out.println("Seleccione un vuelo para cancelarlo. Vuelos reservados: ");
             List<String> cancelOptions = new ArrayList<>();
             for (Flight f : flightForClient) {
                 cancelOptions.add(f.getDate().toString() + " | " + f.getOrigin() + " - " + f.getDestiny());
@@ -335,20 +412,20 @@ public class Menu {
 
                 Date flightDate = flightForClient.get(selectedOption - 1).getDate();
 
-                if(flightDate.before(currentPlus24.getTime())){
+                if (flightDate.before(currentPlus24.getTime())) {
                     System.out.println("No se puede cancelar un vuelo con menos de 24hs de anticipación");
                     systemPause();
-                }else{
+                } else {
                     flightRepository.remove(flightForClient.get(selectedOption - 1).getID());
                     try {
                         flightRepository.commit();
                         //resta del total gastado
-                        client.setTotalSpent(client.getTotalSpent() - (float)flightForClient.get(selectedOption - 1).getTotalCost());
+                        client.setTotalSpent(client.getTotalSpent() - (float) flightForClient.get(selectedOption - 1).getTotalCost());
                         //si borramos un vuelo puede ser que sea el mejor vuelo del usuario,
                         // asi que vamos a tener que ver todos sus vuelos anteriores para ver el mejor (o null si este cancelado fue el único)
                         client.setBestPlaneUsed(null);
                         List<Flight> allFlightForClient = flightRepository.getAllByUsername(client.getUsername());
-                        for(Flight flight: allFlightForClient){
+                        for (Flight flight : allFlightForClient) {
                             Plane plane = planeRepository.get(flight.getPlane());
                             client.setBestPlaneUsed(plane.getType());
                         }
@@ -387,17 +464,17 @@ public class Menu {
                 String formattedDate = parser.format(date);
 
                 //se fija que la fecha no esté en el pasado.
-                if(date.before(currentTime)){
+                if (date.before(currentTime)) {
                     System.out.println("Fecha ya pasada");
                     date = null;
-                }else{
+                } else {
                     System.out.println("Fecha seleccionada: " + formattedDate);
                 }
             } catch (ParseException e) {
                 System.out.println("Fecha seleccionada inválida");
             }
 
-        }while(date == null);
+        } while (date == null);
         return date;
     }
 
@@ -420,7 +497,7 @@ public class Menu {
                 System.out.println("Fecha seleccionada inválida");
             }
 
-        }while(date == null);
+        } while (date == null);
 
         return date;
     }

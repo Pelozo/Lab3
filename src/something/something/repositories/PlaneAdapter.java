@@ -15,29 +15,21 @@ import java.lang.reflect.Type;
 public class PlaneAdapter<T> implements JsonSerializer<T>, JsonDeserializer{
 
     private static final String TYPE = "type";
-    private static final String DATA = "DATA";
 
     public T deserialize(JsonElement jsonElement, Type type,
                          JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
 
         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-        //System.out.println(jsonObject);
         JsonPrimitive prim = (JsonPrimitive) jsonObject.get(TYPE);
-        //System.out.println("prim: " + prim);
+
         String className = prim.getAsString();
-        //System.out.println("classname: " + className);
+
         Class klass = getObjectClass(className);
-        //System.out.println("klass: " + klass);
+
         return jsonDeserializationContext.deserialize(jsonObject, klass);
     }
     public JsonElement serialize(T jsonElement, Type type, JsonSerializationContext context) {
-        /*
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty(CLASSNAME, jsonElement.getClass().getName());
-        jsonObject.add(DATA, jsonSerializationContext.serialize(jsonElement));
-        return jsonObject;
-         */
         JsonElement result = new JsonObject();
 
         if (jsonElement instanceof BronzePlane) {
@@ -58,7 +50,6 @@ public class PlaneAdapter<T> implements JsonSerializer<T>, JsonDeserializer{
         try {
             return Class.forName("something.something.model.plane." + type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase()+ "Plane");
         } catch (ClassNotFoundException e) {
-            //e.printStackTrace();
             throw new JsonParseException(e.getMessage());
         }
     }
